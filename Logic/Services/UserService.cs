@@ -22,12 +22,12 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _configuration = configuration;
         }
 
-        public User Create(NewAccountDto user)
+        public UserDto Create(NewAccountDto user)
         {
             var _user = _mapper.Map<User>(user);
             _user.Id = Guid.NewGuid();
-            _repository.Create(_user);
-            return _user;
+            var _newUser = _repository.Create(_user);
+            return _mapper.Map<UserDto>(_newUser);
         }
 
         public void Delete(int id)
