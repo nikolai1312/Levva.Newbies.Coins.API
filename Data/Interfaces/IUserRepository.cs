@@ -8,7 +8,7 @@ namespace Levva.Newbies.Coins.API.Data.Interfaces
         User GetByEmailAndPassword(string email, string passwd);
         List<User> GetAll();
         void Delete(int id);
-        User Create(User user);
+        void Create(User user);
         void Update(User user);
     }
 }

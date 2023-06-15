@@ -19,21 +19,19 @@ namespace Levva.Newbies.Coins.API.Controllers
         public ActionResult<Category> Create(CategoryDto category)
         {
             var _createdCategory = _service.Create(category);
-            return Created("", _createdCategory);
+            return _createdCategory;
         }
 
         [HttpGet]
         public ActionResult<CategoryDto> Get(Guid id)
         {
-                var _category = _service.Get(id);
-            return Ok(_category);
+            return _service.Get(id);
         }
 
         [HttpGet("list")]
         public ActionResult<List<CategoryDto>> GetAll(Guid id)
         {
-                List<CategoryDto> _category = _service.GetAll();
-            return Ok(_category);
+            return _service.GetAll();
         }
 
         [HttpPut]

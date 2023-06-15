@@ -1,6 +1,8 @@
-﻿using Levva.Newbies.Coins.API.Logic.Dtos;
+﻿using Levva.Newbies.Coins.API.Domain.Models;
+using Levva.Newbies.Coins.API.Logic.Dtos;
 using Levva.Newbies.Coins.API.Logic.Interfaces;
 using Levva.Newbies.Coins.API.Logic.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.API.Controllers
@@ -10,27 +12,32 @@ namespace Levva.Newbies.Coins.API.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _service;
-        public TransactionController(TransactionService service)
+        private readonly ICategoryService _categoryService;
+
+        public TransactionController(ITransactionService service, ICategoryService categoryService)
         {
             _service = service;
+            _categoryService = categoryService;
         }
+
         [HttpPost("Create")]
-        public IActionResult Create(TransactionDto transaction)
+        public IActionResult Create(NewTransactionDto transaction)
         {
-            _service.Create(transaction);
-            return Created("", transaction);
+            var _userId = User.Identity.Name;
+            var _category = _categoryService.Get(transaction.CategoryId);
+            var _transaction = _service.Create(new Guid(_userId), transaction);
+            _transaction.Category = _category;
+            return Created("", _transaction);
         }
         [HttpGet]
         public ActionResult<TransactionDto> Get(int id)
         {
-            var _transaction = _service.Get(id);
-            return Ok(_transaction);
+            return _service.Get(id);
         }
         [HttpGet("list")]
         public ActionResult<List<TransactionDto>> GetAll(int id)
         {
-            List<TransactionDto> _transaction = _service.GetAll();
-            return Ok(_transaction);
+            return _service.GetAll();
         }
         [HttpPut]
         public IActionResult Update(TransactionDto transaction)

@@ -26,15 +26,13 @@ namespace Levva.Newbies.Coins.API.Controllers
         [HttpGet]
         public ActionResult<UserDto> Get(int id)
         {
-            var _user = _service.Get(id);
-            return Ok(_user);
+            return _service.Get(id);
         }
 
         [HttpGet("list")]
         public ActionResult<List<UserDto>> GetAll(int id)
         {
-            List<UserDto> _user = _service.GetAll();
-            return Ok(_user);
+            return _service.GetAll();
         }
 
         [HttpPut]

@@ -13,6 +13,7 @@ namespace Levva.Newbies.Coins.API.Data.Repositories
         public Transaction Create(Transaction transaction)
         {
             _context.Transaction.Add(transaction);
+            transaction.CreatedAt = DateTime.Now;
             _context.SaveChanges();
             return transaction;
         }

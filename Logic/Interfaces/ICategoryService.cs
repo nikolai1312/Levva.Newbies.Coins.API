@@ -5,7 +5,7 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
 {
     public interface ICategoryService
     {
-        Category Create(Category category);
+        Category Create(CategoryDto category);
 
         CategoryDto Get(Guid id);
 
