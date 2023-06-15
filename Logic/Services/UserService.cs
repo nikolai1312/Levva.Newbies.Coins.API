@@ -52,7 +52,7 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _repository.Update(_user);
         }
 
-        public LoginDto Login(LoginDto login)
+        public LoginValuesDto Login(LoginValuesDto login)
         {
             var _user = _repository.GetByEmailAndPassword(login.Email, login.Password);
             if (_user == null)
@@ -71,8 +71,7 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            login.Token = tokenHandler.WriteToken(token);
-            login.Name = _user.Name;
+            login.Token = "Bearer " + tokenHandler.WriteToken(token);
             login.Email = _user.Email;
             login.Password = null;
             return login;

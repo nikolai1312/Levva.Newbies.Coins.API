@@ -11,16 +11,17 @@ namespace Levva.Newbies.Coins.API.Logic.Services
         private readonly ITransactionRepository _repository;
         private readonly IMapper _mapper;
 
-        public public TransactionService(ITransactionRepository repository, IMapper mapper)
+        public TransactionService(ITransactionRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public void Create(TransactionDto transaction)
+        public TransactionDto Create(TransactionDto transaction)
         {
             var _transaction = _mapper.Map<Transaction>(transaction);
-            _repository.Create(_transaction);
+            var _newTransaction = _repository.Create(_transaction);
+            return _mapper.Map<TransactionDto>(_newTransaction);
         }
 
         public void Delete(int id)

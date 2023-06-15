@@ -6,11 +6,16 @@ namespace Levva.Newbies.Coins.API.Logic.MapperProfiles
 {
     public class DefaultMapper : Profile
     {
-        public DefaultMapper() { 
+        public DefaultMapper() {
             CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<LoginDto, User>().ReverseMap();
+            CreateMap<LoginValuesDto, User>().ReverseMap();
             CreateMap<NewAccountDto, User>().ReverseMap();
             CreateMap<TransactionDto, Transaction>().ReverseMap();
+            CreateMap<NewTransactionDto, Transaction>().ReverseMap();
             CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<NewCategoryDto, Category>().ReverseMap();
+
         }
     }
 }

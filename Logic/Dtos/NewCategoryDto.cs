@@ -1,8 +1,7 @@
 ﻿namespace Levva.Newbies.Coins.API.Logic.Dtos
 {
-    public class CategoryDto
+    public class NewCategoryDto
     {
-        public Guid Id { get; set; }
         public string Description { get; set; }
     }
 }

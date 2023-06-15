@@ -10,10 +10,12 @@ namespace Levva.Newbies.Coins.API.Data.Repositories
         {
             _context = context;
         }
-        public void Create(User user)
+        public User Create(User user)
         {
             _context.User.Add(user);
             _context.SaveChanges();
+            return user;
+
         }
 
         public void Delete(int id)

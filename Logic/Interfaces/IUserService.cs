@@ -5,7 +5,7 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
 {
     public interface IUserService
     {
-        User Create(NewAccountDto user);
+        UserDto Create(NewAccountDto user);
         UserDto Get(int id);
         List<UserDto> GetAll();
         void Update(UserDto user);

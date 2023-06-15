@@ -10,10 +10,11 @@ namespace Levva.Newbies.Coins.API.Data.Repositories
         {
             _context = context;
         }
-        public void Create(Transaction transaction)
+        public Transaction Create(Transaction transaction)
         {
             _context.Transaction.Add(transaction);
             _context.SaveChanges();
+            return transaction;
         }
 
         public void Delete(int id)

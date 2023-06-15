@@ -6,7 +6,7 @@ namespace Levva.Newbies.Coins.API.Domain.Models
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public decimal Values { get; set; }
+        public double Amount { get; set; }
         public DateTime CreatedAt { get; set; }
         public TransactionTypeEnum Type { get; set; }
         public Guid CategoryId { get; set; }
