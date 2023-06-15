@@ -6,7 +6,7 @@ namespace Levva.Newbies.Coins.API.Logic.Dtos
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public DateTime CreatedAt { get; set; }
         public TransactionTypeEnum Type { get; set; }
         public CategoryDto Category { get; set; }
