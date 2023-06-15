@@ -1,10 +1,11 @@
-﻿using Levva.Newbies.Coins.API.Logic.Dtos;
+﻿using Levva.Newbies.Coins.API.Domain.Models;
+using Levva.Newbies.Coins.API.Logic.Dtos;
 
 namespace Levva.Newbies.Coins.API.Logic.Interfaces
 {
     public interface ITransactionService
     {
-        TransactionDto Create(TransactionDto transaction);
+        Transaction Create(Transaction transaction);
 
         TransactionDto Get(int id);
 

@@ -1,5 +1,7 @@
 ﻿using Levva.Newbies.Coins.API.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Levva.Newbies.Coins.API.Data
 {
@@ -12,5 +14,6 @@ namespace Levva.Newbies.Coins.API.Data
         public DbSet<Category> Category { get; set; }
 
         public Context(DbContextOptions<Context> options): base(options) { }
+
     }
 }

@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<Context>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default"), b => b.MigrationsAssembly("Levva.Newbies.Coins.API")));
+builder.Services.AddDbContext<Context>(options => options.UseSqlite("Data Source=.\\Databases\\Levva.Newbies.Coins.db", b => b.MigrationsAssembly("Levva.Newbies.Coins.API")));
 
 builder.Services.AddAutoMapper(typeof(DefaultMapper));
 
@@ -30,6 +30,7 @@ builder.Services.AddMvc(config =>
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
 });
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

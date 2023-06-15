@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Levva.Newbies.Coins.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230615162835_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230615191928_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,13 +95,13 @@ namespace Levva.Newbies.Coins.API.Migrations
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.Transaction", b =>
                 {
                     b.HasOne("Levva.Newbies.Coins.API.Domain.Models.Category", "Category")
-                        .WithMany("Transactions")
+                        .WithMany("Transaction")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Levva.Newbies.Coins.API.Domain.Models.User", "User")
-                        .WithMany("Transactions")
+                        .WithMany("Transaction")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -113,12 +113,12 @@ namespace Levva.Newbies.Coins.API.Migrations
 
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.Category", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transaction");
                 });
 
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.User", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transaction");
                 });
 #pragma warning restore 612, 618
         }

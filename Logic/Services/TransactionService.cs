@@ -17,11 +17,11 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _mapper = mapper;
         }
 
-        public TransactionDto Create(TransactionDto transaction)
+        public Transaction Create(Transaction transaction)
         {
             var _transaction = _mapper.Map<Transaction>(transaction);
-            var _newTransaction = _repository.Create(_transaction);
-            return _mapper.Map<TransactionDto>(_newTransaction);
+            _repository.Create(_transaction);
+            return _transaction;
         }
 
         public void Delete(int id)

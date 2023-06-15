@@ -4,6 +4,6 @@
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public virtual List<Transaction> Transactions { get; set; }
+        public virtual List<Transaction> Transaction { get; set; }
     }
 }

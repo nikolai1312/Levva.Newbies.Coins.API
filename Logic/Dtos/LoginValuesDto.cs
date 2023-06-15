@@ -1,4 +1,6 @@
-﻿namespace Levva.Newbies.Coins.API.Logic.Dtos
+﻿using System.Globalization;
+
+namespace Levva.Newbies.Coins.API.Logic.Dtos
 {
     public class LoginValuesDto
     {

@@ -53,7 +53,7 @@ namespace Levva.Newbies.Coins.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult<LoginValuesDto> Login(LoginValuesDto loginDto)
+        public ActionResult<LoginDto> Login(LoginDto loginDto)
         {
             var _login = _service.Login(loginDto);
             if (_login == null)

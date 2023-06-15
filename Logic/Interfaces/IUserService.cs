@@ -5,11 +5,11 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
 {
     public interface IUserService
     {
-        UserDto Create(NewAccountDto user);
+        User Create(NewAccountDto user);
         UserDto Get(int id);
         List<UserDto> GetAll();
         void Update(UserDto user);
         void Delete(int id);
-        LoginValuesDto Login(LoginValuesDto loginDto);
+        LoginDto Login(LoginDto loginDto);
     }
 }

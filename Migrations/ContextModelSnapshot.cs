@@ -92,13 +92,13 @@ namespace Levva.Newbies.Coins.API.Migrations
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.Transaction", b =>
                 {
                     b.HasOne("Levva.Newbies.Coins.API.Domain.Models.Category", "Category")
-                        .WithMany("Transactions")
+                        .WithMany("Transaction")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Levva.Newbies.Coins.API.Domain.Models.User", "User")
-                        .WithMany("Transactions")
+                        .WithMany("Transaction")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -110,12 +110,12 @@ namespace Levva.Newbies.Coins.API.Migrations
 
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.Category", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transaction");
                 });
 
             modelBuilder.Entity("Levva.Newbies.Coins.API.Domain.Models.User", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("Transaction");
                 });
 #pragma warning restore 612, 618
         }

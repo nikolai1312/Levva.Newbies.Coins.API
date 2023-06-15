@@ -22,12 +22,12 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _configuration = configuration;
         }
 
-        public UserDto Create(NewAccountDto user)
+        public User Create(NewAccountDto user)
         {
             var _user = _mapper.Map<User>(user);
             _user.Id = Guid.NewGuid();
-            var _newUser = _repository.Create(_user);
-            return _mapper.Map<UserDto>(_newUser);
+            _repository.Create(_user);
+            return _user;
         }
 
         public void Delete(int id)
@@ -52,7 +52,7 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _repository.Update(_user);
         }
 
-        public LoginValuesDto Login(LoginValuesDto login)
+        public LoginDto Login(LoginDto login)
         {
             var _user = _repository.GetByEmailAndPassword(login.Email, login.Password);
             if (_user == null)
@@ -64,7 +64,8 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, _user.Email)
+                    new Claim(ClaimTypes.Name, _user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, _user.Email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -72,8 +73,10 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             login.Token = "Bearer " + tokenHandler.WriteToken(token);
+            login.Name = _user.Name;
             login.Email = _user.Email;
             login.Password = null;
+            login.Id = _user.Id;
             return login;
         }
 

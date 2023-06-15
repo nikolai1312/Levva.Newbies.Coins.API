@@ -17,12 +17,12 @@ namespace Levva.Newbies.Coins.API.Logic.Services
             _mapper = mapper;
         }
 
-        public CategoryDto Create(CategoryDto category)
+        public Category Create(Category category)
         {
             var _category = _mapper.Map<Category>(category);
             _category.Id = Guid.NewGuid();
-            var _newCategory = _repository.Create(_category);
-            return _mapper.Map<CategoryDto>(_newCategory);
+            _repository.Create(_category);
+            return _category;
         
         }
 
