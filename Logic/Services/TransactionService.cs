@@ -45,8 +45,13 @@ namespace Levva.Newbies.Coins.API.Logic.Services
 
         public List<TransactionDto> SearchDescription(string query)
         {
-            var _transactions = _repository.SearchByDescription(query);
-            return _mapper.Map<List<TransactionDto>>(_transactions);
+            var _transactions = _repository.GetAll();
+            var _transactionList = _transactions.Where(transaction =>
+            {
+                return transaction.Description.Contains(query);
+            }).ToList();
+            var _list = _mapper.Map<List<TransactionDto>>(_transactionList);
+            return _list;
         }
 
         public void Update(TransactionDto transaction)

@@ -32,18 +32,17 @@ namespace Levva.Newbies.Coins.API.Controllers
             return Created("", _transaction);
         }
 
-        [HttpGet]
-        public ActionResult<TransactionDto> Get(int id)
+        [HttpGet("{SearchParams}")]
+        public ActionResult<List<TransactionDto>> Get(string SearchParams)
         {
-            return _service.Get(id);
+            return _service.SearchDescription(SearchParams);
         }
 
         [HttpGet("list")]
-        public ActionResult<List<TransactionDto>> GetAll([FromQuery] string? query)
+        public ActionResult<List<TransactionDto>> GetAll(int id)
         {
-            if (query == null) return _service.GetAll();
 
-            return _service.SearchDescription(query);
+            return _service.GetAll();
         }
 
         [HttpPut]
