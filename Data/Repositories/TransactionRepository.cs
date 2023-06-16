@@ -1,5 +1,6 @@
 ﻿using Levva.Newbies.Coins.API.Data.Interfaces;
 using Levva.Newbies.Coins.API.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Levva.Newbies.Coins.API.Data.Repositories
 {
@@ -32,8 +33,17 @@ namespace Levva.Newbies.Coins.API.Data.Repositories
 
         public List<Transaction> GetAll()
         {
-            return _context.Transaction.ToList();
+            return _context.Transaction.Include(x => x.Category).ToList();
 
+        }
+
+        public ICollection<Transaction> SearchByDescription(string search)
+        {
+            return _context.Transaction.Include(x => x.Category)
+                .Where(x => EF.Functions.Like(x.Description, $"%{search}%") || 
+                EF.Functions.Like(x.Category.Description, $"%{search}%"))
+                .OrderByDescending(x => x.CreatedAt)
+                .ToList();
         }
 
         public void Update(Transaction transaction)

@@ -7,6 +7,7 @@ namespace Levva.Newbies.Coins.API.Data.Interfaces
         Transaction Create(Transaction transaction);
         Transaction Get(int id);
         List<Transaction> GetAll();
+        public ICollection<Transaction> SearchByDescription(string query);
         void Update(Transaction transaction);
         void Delete(int id);
     }

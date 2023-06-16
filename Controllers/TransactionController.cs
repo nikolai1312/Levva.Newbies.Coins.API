@@ -2,11 +2,13 @@
 using Levva.Newbies.Coins.API.Logic.Dtos;
 using Levva.Newbies.Coins.API.Logic.Interfaces;
 using Levva.Newbies.Coins.API.Logic.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransactionController : ControllerBase
@@ -23,22 +25,27 @@ namespace Levva.Newbies.Coins.API.Controllers
         [HttpPost("Create")]
         public IActionResult Create(NewTransactionDto transaction)
         {
-            var _userId = User.Identity.Name;
+            var _userId = User.Identity!.Name;
             var _category = _categoryService.Get(transaction.CategoryId);
             var _transaction = _service.Create(new Guid(_userId), transaction);
             _transaction.Category = _category;
             return Created("", _transaction);
         }
+
         [HttpGet]
         public ActionResult<TransactionDto> Get(int id)
         {
             return _service.Get(id);
         }
+
         [HttpGet("list")]
-        public ActionResult<List<TransactionDto>> GetAll(int id)
+        public ActionResult<List<TransactionDto>> GetAll([FromQuery] string? query)
         {
-            return _service.GetAll();
+            if (query == null) return _service.GetAll();
+
+            return _service.SearchDescription(query);
         }
+
         [HttpPut]
         public IActionResult Update(TransactionDto transaction)
         {

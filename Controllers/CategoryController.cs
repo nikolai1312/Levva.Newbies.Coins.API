@@ -1,10 +1,12 @@
 ﻿using Levva.Newbies.Coins.API.Domain.Models;
 using Levva.Newbies.Coins.API.Logic.Dtos;
 using Levva.Newbies.Coins.API.Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.Newbies.Coins.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -16,10 +18,10 @@ namespace Levva.Newbies.Coins.API.Controllers
         }
 
         [HttpPost("Create")]
-        public ActionResult<Category> Create(CategoryDto category)
+        public IActionResult Create(NewCategoryDto category)
         {
             var _createdCategory = _service.Create(category);
-            return _createdCategory;
+            return Created("", _createdCategory);
         }
 
         [HttpGet]

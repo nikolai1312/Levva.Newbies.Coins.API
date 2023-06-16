@@ -24,12 +24,11 @@ builder.Services.AddDbContext<Context>(options => options.UseSqlite("Data Source
 builder.Services.AddAutoMapper(typeof(DefaultMapper));
 
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddMvc(config =>
-{
-    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-    config.Filters.Add(new AuthorizeFilter(policy));
-});
+//builder.Services.AddMvc(config =>
+//{
+//    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+//    config.Filters.Add(new AuthorizeFilter(policy));
+//});
 
 builder.Services.AddAuthentication(x =>
 {
@@ -43,12 +42,13 @@ builder.Services.AddAuthentication(x =>
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(builder.Configuration.GetSection("Secret").Value)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(s: builder.Configuration.GetSection("Secret").Value)),
         ValidateIssuer = false,
         ValidateAudience = false,
     };
 });
 
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "API LevvaCoins", Version = "v1" });
@@ -88,11 +88,10 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddCors(policyBuilder =>
                policyBuilder.AddDefaultPolicy(policy =>
-               policy.WithOrigins("*").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()));
+               policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())); 
 
 var app = builder.Build();
 
-app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -101,6 +100,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

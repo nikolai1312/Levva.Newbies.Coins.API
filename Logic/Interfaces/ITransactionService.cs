@@ -10,7 +10,9 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
         TransactionDto Get(int id);
 
         List<TransactionDto> GetAll();
-        
+
+        public List<TransactionDto> SearchDescription(string query);
+
         void Update(TransactionDto transaction);
         
         void Delete(int id);
