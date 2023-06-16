@@ -5,7 +5,7 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
 {
     public interface ITransactionService
     {
-        TransactionDto Create(Guid userId, NewTransactionDto transacao);
+        TransactionDto Create(int userId, NewTransactionDto transacao);
 
         TransactionDto Get(int id);
 

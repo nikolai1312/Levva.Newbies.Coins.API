@@ -7,13 +7,13 @@ namespace Levva.Newbies.Coins.API.Logic.Interfaces
     {
         CategoryDto Create(NewCategoryDto category);
 
-        CategoryDto Get(Guid id);
+        CategoryDto Get(int id);
 
         List<CategoryDto> GetAll();
 
         void Update(CategoryDto category);
 
-        void Delete(Guid id);
+        void Delete(int id);
 
     }
 }

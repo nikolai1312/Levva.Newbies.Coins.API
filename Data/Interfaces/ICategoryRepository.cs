@@ -5,9 +5,9 @@ namespace Levva.Newbies.Coins.API.Data.Interfaces
     public interface ICategoryRepository
     {
         Category Create(Category category);
-        Category Get(Guid id);
+        Category Get(int id);
         List<Category> GetAll();
         void Update(Category category);
-        void Delete(Guid id);
+        void Delete(int id);
     }
 }

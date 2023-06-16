@@ -25,13 +25,13 @@ namespace Levva.Newbies.Coins.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<CategoryDto> Get(Guid id)
+        public ActionResult<CategoryDto> Get(int id)
         {
             return _service.Get(id);
         }
 
         [HttpGet("list")]
-        public ActionResult<List<CategoryDto>> GetAll(Guid id)
+        public ActionResult<List<CategoryDto>> GetAll(int id)
         {
             return _service.GetAll();
         }
@@ -44,7 +44,7 @@ namespace Levva.Newbies.Coins.API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(int id)
         {
             _service.Delete(id);
             return Ok();

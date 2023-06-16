@@ -27,7 +27,7 @@ namespace Levva.Newbies.Coins.API.Controllers
         {
             var _userId = User.Identity!.Name;
             var _category = _categoryService.Get(transaction.CategoryId);
-            var _transaction = _service.Create(new Guid(_userId), transaction);
+            var _transaction = _service.Create(Convert.ToInt32(_userId), transaction);
             _transaction.Category = _category;
             return Created("", _transaction);
         }

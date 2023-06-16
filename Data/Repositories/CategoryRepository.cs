@@ -17,14 +17,14 @@ namespace Levva.Newbies.Coins.API.Data.Repositories
             return category;
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             var _category = _context.Category.Find(id);
             _context.Category.Remove(_category);
             _context.SaveChanges();
         }
 
-        public Category Get(Guid id)
+        public Category Get(int id)
         {
             return _context.Category.Find(id);
         }

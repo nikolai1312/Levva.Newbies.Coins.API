@@ -24,12 +24,12 @@ namespace Levva.Newbies.Coins.API.Logic.Services
 
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             _repository.Delete(id);
         }
 
-        public CategoryDto Get(Guid id)
+        public CategoryDto Get(int id)
         {
             var _category = _mapper.Map<CategoryDto>(_repository.Get(id));
             return _category;
